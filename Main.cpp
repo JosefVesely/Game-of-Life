@@ -5,7 +5,7 @@
 
 int main()
 {
-	// hide console window
+	// Hide console window
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	constexpr int rows = 100;
@@ -22,7 +22,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Conway's Game Of Life", sf::Style::Close);
 	window.setFramerateLimit(6);
 
-	// main loop
+	// Main loop
 	while (window.isOpen())
 	{
 		sf::Event evnt;
