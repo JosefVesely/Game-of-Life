@@ -15,7 +15,7 @@ void generateGrid(_2DVector& grid, int rows, int cols)
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			grid[i][j] = rand() % 2;
+			grid[i][j] = rand() % 3;
 		}
 	}
 }
