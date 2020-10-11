@@ -11,6 +11,9 @@ int main()
 	constexpr int rows = 100;
 	constexpr int cols = 100;
 	constexpr float cellSize = 8.0f;
+	const int windowHeight = cols * cellSize;
+	const int windowWidth = rows * cellSize;
+	
 	const sf::Color	cellColor = sf::Color::White;
 	const sf::Color backgroundColor = sf::Color::Black;
 
@@ -19,7 +22,7 @@ int main()
 	generateGrid(grid, rows, cols);
 	
 
-	sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Conway's Game Of Life", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "Conway's Game Of Life", sf::Style::Close);
 	window.setFramerateLimit(6);
 
 	// Main loop
