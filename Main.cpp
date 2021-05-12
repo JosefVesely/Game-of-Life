@@ -5,25 +5,27 @@
 
 int main()
 {
-	// Hide console window
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	// Hide console
+	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	constexpr int rows = 100;
-	constexpr int cols = 100;
-	constexpr float cellSize = 8.0f;
-	const int windowHeight = cols * cellSize;
-	const int windowWidth = rows * cellSize;
+	const int rows = 64;
+	const int cols = 64;
+	const float cell_size = 8.0f;
+
+	const sf::Color	cell_color = sf::Color::White;
+	const sf::Color bg_color = sf::Color::Black;
 	
-	const sf::Color	cellColor = sf::Color::White;
-	const sf::Color backgroundColor = sf::Color::Black;
+	// Create window
+	const int window_height = cols * cell_size;
+	const int window_width = rows * cell_size;
 
-	_2DVector grid(cols, std::vector<bool>(rows, 0));
-	_2DVector nextGrid(cols, std::vector<bool>(rows, 0));
-	generateGrid(grid, rows, cols);
-	
+	sf::RenderWindow window(sf::VideoMode(window_height, window_width), "Conway's Game Of Life", sf::Style::Close);
+	window.setFramerateLimit(30);
 
-	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "Conway's Game Of Life", sf::Style::Close);
-	window.setFramerateLimit(6);
+	// Create grid
+	grid_t grid(cols, std::vector<bool>(rows, 0));
+	grid_t next_grid = grid;
+	generate_grid(grid, rows, cols);
 
 	// Main loop
 	while (window.isOpen())
@@ -34,10 +36,10 @@ int main()
 			if (evnt.type == sf::Event::Closed)
 				window.close();
 		}
-		window.clear(backgroundColor);
+		window.clear(bg_color);
 
-		updateGrid(grid, nextGrid, rows, cols);
-		drawGrid(window, grid, rows, cols, cellSize, cellColor);
+		update_grid(grid, next_grid);
+		draw_grid(window, grid, cell_size, cell_color);
 
 		window.display();
 	}
